@@ -17,7 +17,6 @@ def get_answer(film_name, crit):
         messages=[{"role": "user", "content": f"Предложи 5 фильмов похожих на {name}, основной критерий похожести: {crit}. Ответ без скобок и ковычек"}],
         stream=False,
     )
-    print (response)
 #-------------------Добавление ссылок к названиям---------
     res = response.split("\n")
     film_with_url = ""
