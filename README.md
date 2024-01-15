@@ -6,5 +6,5 @@
 * kinopoisk_api.py - https://github.com/Ulbwaa/KinoPoiskAPI
 * g4f - https://github.com/xtekky/gpt4free
   * Microsoft C++ Build Tools - https://visualstudio.microsoft.com/ru/visual-cpp-build-tools
-    ㅤㅤ
+* telebot - https://github.com/eternnoir/pyTelegramBotAPI
 
