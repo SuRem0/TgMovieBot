@@ -26,7 +26,7 @@ def get_answer(film_name, crit):
             stream=False,
         )
 #-------------------Добавление ссылок к названиям---------
-    res = response.split("\n")
+    res = response.split("\n"); print(f'\n {res} \n');
     film_with_url = ""
     if len(res) == 0:
         return 'не найдено. попробуйте повторить запрос'
@@ -38,4 +38,5 @@ def get_answer(film_name, crit):
         film_with_url = film_with_url + res[i][3:] + " " + url + "\n"
         if film_with_url == "":
             return "Фильмы/Сериалы не найдены"
+    print(f'\n {film_with_url} \n')
     return film_with_url
