@@ -1,7 +1,8 @@
 import g4f
 from kinopoisk_api import KP
+from conf import TOKEN
 
-kinopoisk = KP(token='66e5e12c-1650-485c-930e-81679f376f51')
+kinopoisk = KP(token=TOKEN)
 
 def get_answer(film_name, crit):
 #------------------Проверка ввода-------------------------   
@@ -12,15 +13,24 @@ def get_answer(film_name, crit):
         name = [film[0].ru_name, film[0].year]
         name = " ".join(name) #name - название фильма + год,
 #------------------Получение списка похожих фильмов-------  
-    response = g4f.ChatCompletion.create(
-        model=g4f.models.gpt_35_long,
-        messages=[{"role": "user", "content": f"Предложи 5 фильмов похожих на {name}, основной критерий похожести: {crit}. Ответ без скобок и ковычек"}],
-        stream=False,
-    )
+    try:
+        response = g4f.ChatCompletion.create(
+            model=g4f.models.gpt_35_long,
+            messages=[{"role": "user", "content": f"Предложи 5 фильмов похожих на {name}, основной критерий похожести: {crit}. Ответ без скобок и ковычек"}],
+            stream=False,
+        )
+    except:
+        response = g4f.ChatCompletion.create(
+            model=g4f.models.gpt_35_long,
+            messages=[{"role": "user", "content": f"Предложи 5 фильмов похожих на {name}, основной критерий похожести: {crit}. Ответ без скобок и ковычек"}],
+            stream=False,
+        )
 #-------------------Добавление ссылок к названиям---------
     res = response.split("\n")
     film_with_url = ""
-    for i in range(5):
+    if len(res) == 0:
+        return 'не найдено. попробуйте повторить запрос'
+    for i in range(len(res)):
         flist = kinopoisk.search(res[i][3:])
         if len(flist) == 0:
             continue

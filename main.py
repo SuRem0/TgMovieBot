@@ -1,7 +1,8 @@
 import telebot
 import main_module
+from conf import KEY
 
-bot = telebot.TeleBot('6843284956:AAHBNPfGSoMJF1MQA0jtqcvVgfp-s18S4Lk')
+bot = telebot.TeleBot(KEY)
 users = {}
 
 @bot.message_handler(commands=['start'])
@@ -11,7 +12,7 @@ def start(message):
 
 def film (message):
     global users
-    users[message.chat.id] = message.text.lower()
+    users[message.chat.id] = message.text.lower(); print(users[message.chat.id]);
     markup = telebot.types.InlineKeyboardMarkup()
     btn1 = telebot.types.InlineKeyboardButton('Сюжет', callback_data='suzhet')
     btn2 = telebot.types.InlineKeyboardButton('Атмосфера', callback_data='atmos')
